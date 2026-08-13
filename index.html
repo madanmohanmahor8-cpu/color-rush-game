@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Color Rush — Free Online Game</title>
+<meta name="description" content="Play Color Rush, a fast and fun color reaction game. Beat your high score and challenge yourself.">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#080c16;color:#fff}
+nav{height:64px;display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:auto;padding:0 18px}
+.logo{font-size:22px;font-weight:900}.navbtn{border:1px solid #303b57;background:#151c2d;color:#fff;border-radius:10px;padding:9px 13px}
+.hero{max-width:1100px;margin:35px auto 25px;padding:45px 20px;text-align:center;background:radial-gradient(circle at 50% 0,#394a93,#121a2d 55%,#0b101c);border:1px solid #283452;border-radius:28px}
+h1{font-size:clamp(38px,8vw,70px);margin:0 0 10px;letter-spacing:-2px}.hero p{color:#b7c2d8;font-size:18px;max-width:650px;margin:0 auto 22px}.play{display:inline-block;text-decoration:none;background:#fff;color:#0a0e18;padding:14px 24px;border-radius:14px;font-weight:900}
+.wrap{max-width:1100px;margin:auto;padding:0 18px}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}.feature{background:#121928;border:1px solid #26324d;border-radius:18px;padding:20px}.feature h3{margin:0 0 7px}.feature p{margin:0;color:#9eabc3;font-size:14px}
+.game{background:#101827;border:1px solid #2a3856;border-radius:24px;padding:14px;margin:20px 0}.game iframe{width:100%;height:760px;border:0;border-radius:16px;background:#090d18}
+.ad{border:1px dashed #3a465f;border-radius:14px;padding:14px;text-align:center;color:#77849d;font-size:12px;margin:16px 0}
+footer{border-top:1px solid #202a3e;margin-top:35px;padding:28px 18px;text-align:center;color:#7f8ba2;font-size:13px}
+@media(max-width:650px){.features{grid-template-columns:1fr}.hero{margin-top:18px;padding:34px 16px}.game iframe{height:700px}}
+</style>
+</head>
+<body>
+<nav><div class="logo">🎨 Color Rush</div><a class="navbtn" href="#game">Play Now</a></nav>
+<section class="hero">
+<h1>Color Rush</h1>
+<p>How fast can you find the right color? Build combos, climb levels and beat your high score.</p>
+<a class="play" href="#game">▶ PLAY FREE</a>
+</section>
+<div class="wrap">
+<div class="features">
+<div class="feature"><h3>⚡ Fast & Fun</h3><p>Quick rounds designed for mobile and desktop.</p></div>
+<div class="feature"><h3>🔥 Combo System</h3><p>Keep your streak alive to earn bigger scores.</p></div>
+<div class="feature"><h3>🏆 Beat Your Best</h3><p>Your high score is saved on your device.</p></div>
+</div>
+<div class="ad">ADVERTISEMENT SPACE — connect an approved ad network after the site is published.</div>
+<section id="game" class="game"><iframe src="game.html" title="Color Rush Game"></iframe></section>
+</div>
+<footer>© 2026 Color Rush • Free browser game • Privacy • Contact</footer>
+</body>
+</html>
