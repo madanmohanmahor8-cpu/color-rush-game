@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090d18">
+<meta name="description" content="Color Rush — a fast mobile reaction game with combos, levels, coins, rewards and a cinematic stage-style keypad. Created by Madan Mohan 2026.">
+<title>Color Rush — Created by Madan Mohan 2026</title>
+<style>
+:root{
+  --bg:#070b15;--card:#0e172a;--line:#263957;--text:#f5f7ff;--muted:#aab5c9;
+  --gold:#ffd75a;--blue:#4aa3ff;--green:#35df9a;--danger:#ff5577;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:
+radial-gradient(circle at 50% -10%,#243b63 0,#0b1222 38%,#050811 78%);color:var(--text)}
+body{overflow-x:hidden}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.45;
+  background:radial-gradient(circle at 50% 12%,rgba(255,215,90,.12),transparent 28%),
+             linear-gradient(90deg,transparent 0 8%,rgba(74,163,255,.04) 8% 8.2%,transparent 8.2% 91.8%,rgba(74,163,255,.04) 91.8% 92%,transparent 92%);
+}
+.wrap{width:min(900px,100%);margin:auto;padding:14px}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 2px 14px}
+.brand{font-weight:900;font-size:24px;letter-spacing:.2px}
+.creator{font-size:12px;color:var(--muted);margin-top:2px}
+.best{padding:9px 14px;border:1px solid #3b5275;border-radius:999px;background:#0c1629;box-shadow:0 0 18px rgba(74,163,255,.14);white-space:nowrap}
+.hero,.card{background:linear-gradient(180deg,rgba(20,33,56,.97),rgba(8,16,30,.97));border:1px solid var(--line);border-radius:26px;box-shadow:0 18px 55px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.04)}
+.hero{padding:25px 16px 20px;text-align:center;position:relative;overflow:hidden}
+.hero:before{
+  content:"";position:absolute;left:12%;right:12%;top:0;height:2px;
+  background:linear-gradient(90deg,transparent,#ffcf55,#fff,#66b6ff,#ffcf55,transparent);
+  box-shadow:0 0 18px #ffd75a;
+}
+.logo{font-size:54px;filter:drop-shadow(0 0 18px rgba(255,215,90,.35))}
+h1{font-size:clamp(36px,10vw,62px);margin:2px 0 8px;letter-spacing:-1.8px}
+.tagline{color:#c5cee0;line-height:1.55;max-width:620px;margin:0 auto 18px}
+button{font:inherit}
+.start{
+  border:0;border-radius:18px;padding:15px 28px;font-weight:900;font-size:18px;
+  color:#14100a;background:linear-gradient(180deg,#fff0a6,#ffd75a 58%,#ffbf3f);
+  box-shadow:0 0 0 1px #fff2a3 inset,0 8px 30px rgba(255,195,55,.28);
+  cursor:pointer;transition:.15s transform,.15s filter;
+}
+.start:active{transform:scale(.96);filter:brightness(1.15)}
+.features{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+.feature{padding:18px 14px;text-align:center;border:1px solid #243957;border-radius:20px;background:#091426;box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+.feature .ico{font-size:26px}.feature h3{margin:6px 0 5px}.feature p{margin:0;color:var(--muted);font-size:14px;line-height:1.4}
+.game{margin-top:14px;padding:16px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.game-title{font-size:22px;font-weight:900}
+.badge{border:1px solid #405579;border-radius:999px;padding:7px 11px;background:#0b1629}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.stat{background:#091426;border:1px solid #263957;border-radius:16px;padding:10px;text-align:center}
+.stat b{display:block;font-size:21px}.stat span{color:#9eabc1;font-size:11px;letter-spacing:.7px}
+.status{text-align:center;color:#dbe4f5;margin:8px 0 12px;min-height:22px}
+.progress{height:8px;border-radius:99px;background:#18263d;overflow:hidden;border:1px solid #263957}
+.bar{height:100%;width:100%;background:linear-gradient(90deg,#4aa3ff,#9d7cff,#ffd75a);box-shadow:0 0 14px rgba(255,215,90,.55);transition:width .25s}
+.keypad{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px;
+  max-width:620px;margin-left:auto;margin-right:auto;
+}
+.key{
+  min-height:86px;border:1px solid #415a80;border-radius:20px;color:white;font-weight:900;
+  font-size:18px;position:relative;overflow:hidden;cursor:pointer;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 8px 18px rgba(0,0,0,.24);
+  transition:transform .1s,filter .1s,box-shadow .1s;
+}
+.key:before{content:"";position:absolute;inset:-45%;background:radial-gradient(circle,rgba(255,255,255,.7),transparent 36%);opacity:0;transition:.1s}
+.key:after{content:"";position:absolute;left:15%;right:15%;top:5px;height:2px;background:rgba(255,255,255,.55);filter:blur(2px)}
+.key:active,.key.flash{transform:scale(.94);filter:brightness(1.35);box-shadow:0 0 28px var(--glow),inset 0 0 22px rgba(255,255,255,.16)}
+.key:active:before,.key.flash:before{opacity:.55}
+.red{background:linear-gradient(145deg,#6b132d,#ed3d67);--glow:#ff3d72}
+.blue{background:linear-gradient(145deg,#123d79,#287cff);--glow:#3690ff}
+.green{background:linear-gradient(145deg,#0d5b4a,#25c987);--glow:#31e0a1}
+.yellow{background:linear-gradient(145deg,#765a0a,#e8b928);--glow:#ffd33d}
+.purple{background:linear-gradient(145deg,#452276,#9b5cff);--glow:#a865ff}
+.orange{background:linear-gradient(145deg,#713211,#ff843c);--glow:#ff8a42}
+.pink{background:linear-gradient(145deg,#741c51,#ef5fbd);--glow:#ff69c8}
+.cyan{background:linear-gradient(145deg,#0d5560,#28dce5);--glow:#2deaff}
+.lime{background:linear-gradient(145deg,#3b650f,#9bdc39);--glow:#b1f24d}
+.controls{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:13px}
+.action{border:1px solid #3b5275;background:#0c1729;color:#eef4ff;border-radius:14px;padding:11px 16px;font-weight:800;cursor:pointer}
+.action.main{background:linear-gradient(180deg,#263c60,#162640);box-shadow:0 0 18px rgba(74,163,255,.13)}
+.ad{margin-top:14px;padding:13px;border:1px dashed #3c506f;border-radius:16px;text-align:center;color:#8290a8;font-size:12px}
+.overlay{margin-top:14px;padding:22px;text-align:center;border:1px solid #4a5e80;border-radius:20px;background:#0a1425}
+.hidden{display:none}
+.result-score{font-size:36px;font-weight:900;color:#ffd75a}
+.hint{text-align:center;color:#8997ad;font-size:12px;line-height:1.5;margin:14px 2px 0}
+footer{text-align:center;color:#6f7d93;font-size:12px;padding:22px 4px}
+@media(max-width:600px){
+ .features{grid-template-columns:1fr}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .key{min-height:74px;font-size:16px;border-radius:17px}
+ .game{padding:12px}.hero{padding:22px 13px 18px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div>
+    <div class="brand">🎨 Color Rush</div>
+    <div class="creator">Created by Madan Mohan 2026</div>
+  </div>
+  <div class="best">🏆 Best <b id="high">0</b></div>
+</header>
+
+<section class="hero">
+  <div class="logo">🎨</div>
+  <h1>Color Rush</h1>
+  <p class="tagline">Tap the correct color, build combos, climb levels, collect coins and beat your best score in a cinematic stage-style challenge.</p>
+  <button class="start" id="heroStart">▶ START GAME</button>
+</section>
+
+<section class="features">
+  <div class="feature"><div class="ico">⚡</div><h3>Fast &amp; Fun</h3><p>Quick mobile-friendly reaction rounds.</p></div>
+  <div class="feature"><div class="ico">🔥</div><h3>Combo System</h3><p>Keep your streak alive for bigger scores.</p></div>
+  <div class="feature"><div class="ico">🏆</div><h3>Beat Your Best</h3><p>Your high score is saved on this device.</p></div>
+  <div class="feature"><div class="ico">📈</div><h3>Levels &amp; Progress</h3><p>Difficulty and keypad size increase as you play.</p></div>
+  <div class="feature"><div class="ico">🪙</div><h3>Coins &amp; Rewards</h3><p>Earn coins from correct taps and combos.</p></div>
+  <div class="feature"><div class="ico">🎬</div><h3>Cinematic Stage</h3><p>Shining tiles, glow and spotlight-style feedback.</p></div>
+  <div class="feature"><div class="ico">🔊</div><h3>Sound Effects</h3><p>Optional arcade-style feedback sounds.</p></div>
+  <div class="feature"><div class="ico">⏸️</div><h3>Pause &amp; Restart</h3><p>Control the round whenever you need.</p></div>
+  <div class="feature"><div class="ico">📱</div><h3>Mobile Ready</h3><p>Designed for phone screens and touch.</p></div>
+</section>
+
+<section class="card game" id="game">
+  <div class="top"><div class="game-title">🎬 Cinematic Stage</div><div class="badge">🪙 <b id="coins">0</b></div></div>
+  <div class="stats">
+    <div class="stat"><b id="score">0</b><span>SCORE</span></div>
+    <div class="stat"><b id="time">45</b><span>TIME</span></div>
+    <div class="stat"><b id="combo">0</b><span>COMBO</span></div>
+    <div class="stat"><b id="level">1</b><span>LEVEL</span></div>
+  </div>
+  <div class="status" id="status">Press START to begin</div>
+  <div class="progress"><div class="bar" id="bar"></div></div>
+  <div class="keypad" id="keypad"></div>
+  <div class="controls">
+    <button class="action main" id="start">▶ START GAME</button>
+    <button class="action" id="sound">🔊 Sound: ON</button>
+    <button class="action" id="pause">⏸️ Pause</button>
+  </div>
+  <div class="ad">ADVERTISEMENT SPACE — suitable for a future approved ad network</div>
+  <div class="overlay hidden" id="result">
+    <h2 id="resultTitle">Time's Up!</h2>
+    <div>Final Score</div>
+    <div class="result-score" id="final">0</div>
+    <div id="record"></div>
+    <button class="action" id="again">🔥 PLAY AGAIN</button>
+  </div>
+  <p class="hint">Fast reactions • Combo bonuses • Levels • Coins &amp; rewards • Local high score • Sound effects • Mobile friendly • Cinematic keypad</p>
+</section>
+
+<footer>© 2026 Color Rush • Created by Madan Mohan 2026 • Free browser game</footer>
+</div>
+
+<script>
+const COLORS=[
+ ["RED","#ff456f","red"],["BLUE","#3d8bff","blue"],["GREEN","#27c875","green"],
+ ["YELLOW","#f5c542","yellow"],["PURPLE","#a66cff","purple"],["ORANGE","#ff8738","orange"],
+ ["PINK","#ff5fc7","pink"],["CYAN","#2bd9e8","cyan"],["LIME","#a6e83b","lime"]
+];
+
+let score=0,combo=0,time=45,level=1,coins=0,running=false,paused=false,timer=null,target=0,sound=true;
+let high=Number(localStorage.getItem("cr_high")||0);
+let savedCoins=Number(localStorage.getItem("cr_coins")||0);
+coins=savedCoins;
+
+const $=id=>document.getElementById(id);
+$("high").textContent=high;$("coins").textContent=coins;
+
+function tone(freq=440,d=.07,type="sine"){
+ if(!sound)return;
+ try{
+   const A=new (window.AudioContext||window.webkitAudioContext)();
+   const o=A.createOscillator(),g=A.createGain();
+   o.type=type;o.frequency.value=freq;g.gain.value=.045;
+   o.connect(g);g.connect(A.destination);o.start();
+   g.gain.exponentialRampToValueAtTime(.001,A.currentTime+d);
+   o.stop(A.currentTime+d);
+ }catch(e){}
+}
+function shuffle(a){return a.sort(()=>Math.random()-.5)}
+
+function build(){
+ const count=level>=4?12:9;
+ $("keypad").style.gridTemplateColumns=count===12?"repeat(4,1fr)":"repeat(3,1fr)";
+ target=Math.floor(Math.random()*Math.min(COLORS.length,5+Math.floor(level/2)));
+ $("status").innerHTML='Find the <b>'+COLORS[target][0]+'</b> tile';
+ let arr=[target];
+ while(arr.length<count){
+   const x=Math.floor(Math.random()*COLORS.length);
+   if(!arr.includes(x)||Math.random()<.25)arr.push(x);
+ }
+ shuffle(arr);
+ $("keypad").innerHTML="";
+ arr.forEach(idx=>{
+   const b=document.createElement("button");
+   b.className="key "+COLORS[idx][2];
+   b.textContent=COLORS[idx][0];
+   b.setAttribute("aria-label",COLORS[idx][0]);
+   b.onclick=()=>choose(idx,b);
+   $("keypad").appendChild(b);
+ });
+}
+
+function choose(ok,b){
+ if(!running||paused)return;
+ b.classList.add("flash");setTimeout(()=>b.classList.remove("flash"),120);
+ if(ok===target){
+   combo++;
+   const gain=10+Math.min(combo,15)*2+level*2;
+   score+=gain;coins+=1+(combo%5===0?2:0);
+   tone(560+combo*15,.08,"triangle");
+   if(combo%5===0){score+=35*level;toast("🔥 "+combo+" COMBO + BONUS");tone(880,.12)}
+   if(score>=level*180){level++;toast("⚡ LEVEL "+level);tone(990,.12,"square")}
+   saveCoins();build();
+ }else{
+   combo=0;score=Math.max(0,score-8);tone(160,.1,"sawtooth");toast("❌ -8");
+ }
+ update();
+}
+function update(){
+ $("score").textContent=score;$("time").textContent=time;$("combo").textContent=combo;$("level").textContent=level;
+ $("coins").textContent=coins;$("high").textContent=high;
+ $("bar").style.width=(time/45*100)+"%";
+}
+function startGame(){
+ clearInterval(timer);
+ score=0;combo=0;time=45;level=1;running=true;paused=false;
+ $("pause").textContent="⏸️ Pause";$("start").textContent="↻ Restart";
+ $("result").classList.add("hidden");update();build();
+ timer=setInterval(()=>{if(!paused){time--;update();if(time<=0)finish()}},1000);
+}
+function finish(){
+ clearInterval(timer);running=false;
+ $("final").textContent=score;
+ let isNew=score>high;
+ if(isNew){high=score;localStorage.setItem("cr_high",high)}
+ $("record").textContent=isNew?"🏆 NEW HIGH SCORE!":"Best: "+high;
+ $("resultTitle").textContent=score>=500?"🔥 Amazing Run!":"Time's Up!";
+ $("result").classList.remove("hidden");
+ tone(700,.15);setTimeout(()=>tone(900,.15),120);
+ update();
+}
+function toast(t){
+ const el=document.createElement("div");el.textContent=t;
+ Object.assign(el.style,{position:"fixed",left:"50%",top:"18%",transform:"translateX(-50%)",zIndex:99,padding:"12px 18px",borderRadius:"999px",background:"#111d32",border:"1px solid #4b6288",boxShadow:"0 0 25px rgba(255,215,90,.25)",fontWeight:"900"});
+ document.body.appendChild(el);setTimeout(()=>el.remove(),850);
+}
+function saveCoins(){localStorage.setItem("cr_coins",coins)}
+$("start").onclick=startGame;
+$("heroStart").onclick=()=>{document.getElementById("game").scrollIntoView({behavior:"smooth"});setTimeout(startGame,250)};
+$("again").onclick=startGame;
+$("pause").onclick=()=>{
+ if(!running)return;
+ paused=!paused;$("pause").textContent=paused?"▶️ Resume":"⏸️ Pause";
+ $("status").textContent=paused?"Game paused — press Resume to continue":"Find the "+COLORS[target][0]+" tile";
+};
+$("sound").onclick=()=>{
+ sound=!sound;$("sound").textContent=sound?"🔊 Sound: ON":"🔇 Sound: OFF";
+ if(sound)tone(700,.08);
+};
+update();
+</script>
+</body>
+</html>
